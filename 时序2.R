@@ -44,3 +44,23 @@ tsdiag(fit2)
 
 fit9 = arima(LakeHuron,order = c(9,0,0), transform.pars = F, fixed = c(NA,NA,0,0,0,0,0,0,NA,NA))
 fit9
+
+## 非平稳序列
+plot(airmiles)
+plot(diff(airmiles))
+plot(diff(diff(airmiles)))
+
+# adf.test(diff(airmiles))
+
+y <- diff(diff(airmiles))
+adf.test(y)
+
+acf(y)
+pacf(y)
+
+fit1 = arima(airmiles,order = c(1,2,0))
+fit1
+tsdiag(fit1)
+
+fore1 = forecast(fit1,10)
+fore1
